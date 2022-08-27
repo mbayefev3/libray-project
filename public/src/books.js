@@ -18,9 +18,9 @@ function partitionBooksByBorrowedStatus(books) {
    })
   }
   // 
- const getAllCheckOutBook=findBookBasedOnBorrowedStatus(false,books)
+ const getAllCheckedOutBooks=findBookBasedOnBorrowedStatus(false,books)
  const getAvailableBooks =findBookBasedOnBorrowedStatus(true,books)
- return [getAllCheckOutBook, getAvailableBooks]
+ return [getAllCheckedOutBooks, getAvailableBooks]
 }
 
 
