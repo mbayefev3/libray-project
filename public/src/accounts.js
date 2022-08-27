@@ -37,14 +37,14 @@ function getBooksPossessedByAccount(account, books, authors) {
     })
   const summaryOfBooksCheckedOutById=booksCheckedOutById.map(book =>{
 const {id,title,genre,authorId,borrows}=book
-const authorsInfo=authors.filter(author => author.id===authorId )
+const authorInfo=authors.filter(author => author.id===authorId )
 
 return {
   id,
   title,
   genre,
   authorId,
-  author:authorsInfo[0],
+  author:authorInfo[0],
   borrows
 }
 })
