@@ -9,69 +9,69 @@ function getTotalAccountsCount(accounts) {
 
 
 function getBooksBorrowedCount(books) {
-  const answer=[]
+  const totalBookBorrowed=[]
   for(let book of books){
     const {borrows}=book
     if(!borrows[0].returned){
-      answer.push(1)
+      totalBookBorrowed.push(1)
     }
   }
-return answer.reduce((bk1,bk2) => bk1+bk2)
+return totalBookBorrowed.reduce((firstItemInTheSum,secondItemInTheSum) => firstItemInTheSum+secondItemInTheSum)
 }
 
 
 function getMostCommonGenres(books) {
-  const allGenres=[]
-const dup=[]
+  const getAllBooksGenre=[]
+const duplicateGenre=[]
   for(let book of books){
     const {genre}=book
-    if(!dup.includes(genre)){
-   dup.push(genre)
-      const filteredGenres=books.filter(bk => bk.genre===genre)
-    const obj={
+    if(!duplicateGenre.includes(genre)){
+   duplicateGenre.push(genre)
+      const filteredByBookGenre=books.filter(book => book.genre===genre)
+    const genreSummary={
       name:genre,
-      count:filteredGenres.length
+      count:filteredByBookGenre.length
     }
-     allGenres.push(obj)
+     getAllBooksGenre.push(genreSummary)
  }
-   if(allGenres.length>=5){
+   if(getAllBooksGenre.length>=5){
       break
     }
     
   }
-  allGenres.sort((bk1,bk2) => bk2.count -bk1.count)
-  return allGenres
+  getAllBooksGenre.sort((firstGenre,secondGenre) =>  secondGenre.count - firstGenre.count)
+  return getAllBooksGenre
 }
 
 
 
 function getMostPopularBooks(books) {
-  books.sort((bk1,bk2) =>bk2.borrows.length- bk1.borrows.length)
-  const answer=books.slice(0,5).map(bk =>{
+  books.sort((firstBook,secondBook) => secondBook.borrows.length - firstBook.borrows.length)
+  const fiveMostPopularBooks=books.slice(0,5).map(book =>{
     return  {
-      name:bk.title,
-      count:bk.borrows.length
+      name:book.title,
+      count:book.borrows.length
     }
   })
-return answer
+return fiveMostPopularBooks
   }
 
 function getMostPopularAuthors(books, authors) {
   
-  const authId=authors.map(auth => auth.id)
-  const bookCheckOut=authId.map(id => {
-   const authorb= books.find(bk => bk.authorId ===id)
-   const {borrows}=authorb
-   const checkOutLength=borrows.length
-   const obj=authors.find(n => n.id ===id )
-   const {name:{first,last}}=obj
+  const getAllAuthorIds=authors.map(author => author.id)
+  const getAthorStatsOnBook=getAllAuthorIds.map(authorId=> {
+   const getBookByAuthorId= books.find(book => book.authorId ===authorId)
+   const {borrows}=getBookByAuthorId
+   const numberOfTimesTheBookBeenUsed=borrows.length
+   const rettrievedAuthorInfo=authors.find(author => author.id ===authorId )
+   const {name:{first,last}}=rettrievedAuthorInfo
    return {
      name:first+' '+last,
-     count:checkOutLength
+     count:numberOfTimesTheBookBeenUsed
    }
   })
   
-  return bookCheckOut.sort((bk1,bk2) => bk2.count -bk1.count).slice(0,5)
+  return getAthorStatsOnBook.sort((firstAuthor,secondAuthor) => secondAuthor.count - firstAuthor.count).slice(0,5)
 }
 
 module.exports = {
