@@ -11,7 +11,7 @@ function findBookById(books, id) {
 
 function partitionBooksByBorrowedStatus(books) {
 
-  
+  // helper func
   const findBook =(bool, books) => {
    return books.filter(bk =>{
    const {borrows}=bk
@@ -20,6 +20,7 @@ function partitionBooksByBorrowedStatus(books) {
    
  })
   }
+  // 
  const findCheckOut=findBook(false,books)
  const findCheckIn =findBook(true,books)
  

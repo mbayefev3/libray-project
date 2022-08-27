@@ -1,13 +1,13 @@
 function findAccountById(accounts, id) {
 
-  const getAccountById=accounts.filter(c => c.id===id)
+  const getAccountById=accounts.filter(account => account.id===id)
   return getAccountById[0]
 }
 
 function sortAccountsByLastName(accounts) {
-  accounts.sort((a,b) => {
-const {name:{last:lastA}}=a
-const {name:{last:lastB}}=b
+  accounts.sort((acc1,acc2) => {
+const {name:{last:lastA}}=acc1
+const {name:{last:lastB}}=acc2
 
 return lastA<lastB ? -1:0
 
@@ -21,11 +21,12 @@ function getTotalNumberOfBorrows(account, books) {
 
   const {id:accountId} =account
 
+  // helper function
   const getAllBorrowBooks=(books) => books.map(bk => {
 const {borrows}=bk
 return borrows.filter(bk => bk.returned)
   }).flat()
-  
+  // 
   const totalBorrowBookById=getAllBorrowBooks(books).filter(bk => bk.id===accountId)
   return totalBorrowBookById.length
 }
