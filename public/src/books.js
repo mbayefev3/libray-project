@@ -4,37 +4,29 @@ function findAuthorById(authors, id) {
 }
 
 function findBookById(books, id) {
-
-  return books.find(bk => bk.id===id)
+return books.find(bk => bk.id===id)
 }
 
 
 function partitionBooksByBorrowedStatus(books) {
-
-  // helper func
+ // helper func
   const findBook =(bool, books) => {
    return books.filter(bk =>{
    const {borrows}=bk
    const [first]=borrows
    return first.returned===bool
-   
- })
+   })
   }
   // 
  const findCheckOut=findBook(false,books)
  const findCheckIn =findBook(true,books)
- 
- 
  return [findCheckOut, findCheckIn]
-
 }
 
 
 function getBorrowersForBook(book, accounts) {
-
-  const {borrows}=book
-
-  const borrowers=[]
+const {borrows}=book
+const borrowers=[]
   for(let acc of accounts){
     const {id,picture,age,name,company,email, registered}=acc
  const getInfo=borrows.find(bk => bk.id===id)
@@ -43,18 +35,14 @@ function getBorrowersForBook(book, accounts) {
  const obj={
 id,returned,picture,age,name,company,email,registered
  }
- 
  if(borrowers.length<=10){
   borrowers.push(obj)
-
- }else{
+}else{
   break
  }
-
-  }
  }
-
-  return borrowers
+ }
+ return borrowers
 
 }
 

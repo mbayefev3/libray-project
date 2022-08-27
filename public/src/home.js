@@ -3,15 +3,14 @@ function getTotalBooksCount(books) {
 }
 
 function getTotalAccountsCount(accounts) {
-  
-  return accounts.length
+   return accounts.length
 }
 
+
+
 function getBooksBorrowedCount(books) {
-  
   const answer=[]
   for(let book of books){
-    
     const {borrows}=book
     if(!borrows[0].returned){
       answer.push(1)
@@ -20,37 +19,33 @@ function getBooksBorrowedCount(books) {
 return answer.reduce((bk1,bk2) => bk1+bk2)
 }
 
+
 function getMostCommonGenres(books) {
-  
-      const allGenres=[]
+  const allGenres=[]
 const dup=[]
   for(let book of books){
     const {genre}=book
-    
- if(!dup.includes(genre)){
+    if(!dup.includes(genre)){
    dup.push(genre)
       const filteredGenres=books.filter(bk => bk.genre===genre)
     const obj={
       name:genre,
       count:filteredGenres.length
     }
-    
-  allGenres.push(obj)
+     allGenres.push(obj)
  }
-   
-    if(allGenres.length>=5){
+   if(allGenres.length>=5){
       break
     }
     
   }
-  
   allGenres.sort((bk1,bk2) => bk2.count -bk1.count)
-  
   return allGenres
 }
 
+
+
 function getMostPopularBooks(books) {
-  
   books.sort((bk1,bk2) =>bk2.borrows.length- bk1.borrows.length)
   const answer=books.slice(0,5).map(bk =>{
     return  {
@@ -64,7 +59,6 @@ return answer
 function getMostPopularAuthors(books, authors) {
   
   const authId=authors.map(auth => auth.id)
-  
   const bookCheckOut=authId.map(id => {
    const authorb= books.find(bk => bk.authorId ===id)
    const {borrows}=authorb
@@ -77,7 +71,7 @@ function getMostPopularAuthors(books, authors) {
    }
   })
   
- return bookCheckOut.sort((bk1,bk2) => bk2.count -bk1.count).slice(0,5)
+  return bookCheckOut.sort((bk1,bk2) => bk2.count -bk1.count).slice(0,5)
 }
 
 module.exports = {
