@@ -38,12 +38,11 @@ id,returned,picture,age,name,company,email,registered
  if(borrowers.length<=10){
   borrowers.push(borrowerInfo)
 }else{
-  break
+break
  }
  }
  }
  return borrowers
-
 }
 
 module.exports = {
